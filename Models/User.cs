@@ -1,0 +1,16 @@
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace dotnet_mywallet.Models
+{
+    [Table("users")]
+    public class User
+    {
+        [Key]
+        public int Id { get; set; }
+        public string Name { get; set; } = "Anônimo";
+        public string Email { get; set; } = String.Empty;
+        public byte[] PasswordHash { get; set; } = new byte[0];
+        public byte[] PasswordSalt { get; set; } = new byte[0];
+    }
+}

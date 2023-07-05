@@ -14,6 +14,7 @@ namespace dotnet_mywallet.Data
             var user = modelBuilder.Entity<User>();
             user.Property(x => x.Name).HasColumnName("name").IsRequired();
             user.Property(x => x.Email).HasColumnName("email").IsRequired();
+            user.Property(x => x.CreatedAt).HasColumnName("createdAt").IsRequired();
         }
 
         public DbSet<User> Users => Set<User>();

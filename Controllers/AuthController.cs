@@ -8,11 +8,24 @@ namespace dotnet_mywallet.Controllers
     [Route("api/auth")]
     public class AuthController : ControllerBase
     {
-        private readonly IAuthRepository _authRepo;
+        private readonly IAuthService _authService;
 
-        public AuthController(IAuthRepository authRepo)
+        public AuthController(IAuthService authService)
         {
-            _authRepo = authRepo;
+            _authService = authService;
+        }
+
+        [HttpPost("signin")]
+        public async Task<ActionResult<ServiceResponse<string>>> Login(UserLoginDto user)
+        {
+            var response = await _authService.Login(user.Email, user.Password);
+
+            if(!response.Success)
+            {
+                if(response.Message == "User/Password is incorrect.")
+                    return Unauthorized(response);
+            }
+            return Ok(response);
         }
 
         [HttpPost("signup")]
@@ -24,11 +37,11 @@ namespace dotnet_mywallet.Controllers
                 Email = newUserDto.Email,
             };
 
-            var response = await _authRepo.InsertOne(newUser, newUserDto.Password);
+            var response = await  _authService.SignUp(newUser, newUserDto.Password);
 
             if (!response.Success)
             {
-                return BadRequest(response);
+                if(response.Message == "User already exists.") return Conflict(response);
             }
             return Created("Create an user", response);
         }

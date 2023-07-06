@@ -30,7 +30,7 @@ namespace dotnet_mywallet.Controllers
 
         [HttpPost("signup")]
         public async Task<ActionResult<ServiceResponse<int>>> SignUp(UserRegisterDto newUserDto)
-        {
+        {    
             var newUser = new User
             {
                 Name = newUserDto.Name,

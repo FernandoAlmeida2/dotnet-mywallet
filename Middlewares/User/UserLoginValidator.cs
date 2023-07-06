@@ -1,12 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using dotnet_mywallet.Dtos.User;
+using FluentValidation;
 
 namespace dotnet_mywallet.Middlewares.User
 {
-    public class UserLoginValidator
+    public class UserLoginValidator : AbstractValidator<UserLoginDto>
     {
-        
+       public UserLoginValidator()
+       {
+            RuleFor(p => p.Email).EmailAddress().WithMessage("Provide a valid email!");
+       }
     }
 }

@@ -25,5 +25,6 @@ namespace dotnet_mywallet.Data
         }
 
         public DbSet<User> Users => Set<User>();
+        public DbSet<Record> Records => Set<Record>(); 
     }
 }

@@ -31,5 +31,19 @@ namespace dotnet_mywallet.Repositories.RecordRepository
 
             return newRecord.Id;
         }
+
+        public async Task<bool> UpdateAmount(int id, int newAmount)
+        {
+            var record = await _dbContext.Records
+                .FirstOrDefaultAsync(r => r.Id == id && r.User!.Id == _userContext.GetUserId());
+
+            if(record is null) return false;
+
+            record.Amount = newAmount;
+            await _dbContext.SaveChangesAsync();
+
+            return true;
+
+        }
     }
 }

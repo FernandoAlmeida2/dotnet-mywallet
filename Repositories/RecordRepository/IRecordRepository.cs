@@ -6,5 +6,6 @@ namespace dotnet_mywallet.Repositories.RecordRepository
     {
         Task<int> InsertOne(Record newRecord);
         Task<List<Record>> FindAll();
+        Task<bool> UpdateAmount(int id, int newAmount);
     }
 }

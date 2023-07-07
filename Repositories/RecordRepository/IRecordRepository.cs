@@ -6,6 +6,8 @@ namespace dotnet_mywallet.Repositories.RecordRepository
     {
         Task<int> InsertOne(Record newRecord);
         Task<List<Record>> FindAll();
+        Task<Record?> FindRecordById(int id);
         Task<bool> UpdateAmount(int id, int newAmount);
+        Task<bool> DeleteOne(int id);
     }
 }

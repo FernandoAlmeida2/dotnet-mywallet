@@ -8,5 +8,6 @@ namespace dotnet_mywallet.Services.RecordService
         Task<ServiceResponse<int>> SaveRecord(SaveRecordReqDto newRecord);
         Task<ServiceResponse<List<RecordResDto>>> GetAll();
         Task<ServiceResponse<string>> PatchAmount(int id, int amount);
+        Task<ServiceResponse<string>> DeleteRecord(int id);
     }
 }

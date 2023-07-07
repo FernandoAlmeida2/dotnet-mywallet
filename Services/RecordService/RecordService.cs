@@ -57,5 +57,21 @@ namespace dotnet_mywallet.Services.RecordService
 
             return response;
         }
+
+        public async Task<ServiceResponse<string>> DeleteRecord(int id)
+        {
+            var response = new ServiceResponse<string>();
+            try
+            {
+                var recordExists = await _recordRepo.DeleteOne(id);
+                if (!recordExists) throw new Exception("Record not found");
+
+                response.Data = "Ok";
+                response.Message = "Record deleted successfully!";
+            }
+            catch (Exception ex) { response.HandleError(ex.Message); }
+
+            return response;
+        }
     }
 }

@@ -39,5 +39,16 @@ namespace dotnet_mywallet.Controllers
             }
             return Ok(response);
         }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult<ServiceResponse<string>>> DeleteRecord(int id)
+        {
+            var response = await _recordService.DeleteRecord(id);
+            if (!response.Success)
+            {
+                if(response.Message == "Record not found.") return NotFound(response);
+            }
+            return Ok(response);
+        }
     }
 }

@@ -21,6 +21,12 @@ namespace dotnet_mywallet.Repositories.RecordRepository
                 .Where(r => r.User!.Id == _userContext.GetUserId()).ToListAsync();
         }
 
+         public async Task<Record?> FindRecordById(int id)
+        {
+            return await _dbContext.Records
+                .FirstOrDefaultAsync(r => r.Id == id && r.User!.Id == _userContext.GetUserId());
+        }
+
         public async Task<int> InsertOne(Record newRecord)
         {
             newRecord.User = await _dbContext.Users
@@ -34,8 +40,7 @@ namespace dotnet_mywallet.Repositories.RecordRepository
 
         public async Task<bool> UpdateAmount(int id, int newAmount)
         {
-            var record = await _dbContext.Records
-                .FirstOrDefaultAsync(r => r.Id == id && r.User!.Id == _userContext.GetUserId());
+            var record = await FindRecordById(id);
 
             if(record is null) return false;
 
@@ -45,5 +50,18 @@ namespace dotnet_mywallet.Repositories.RecordRepository
             return true;
 
         }
+
+        public async Task<bool> DeleteOne(int id)
+        {
+            var record = await FindRecordById(id);
+
+            if(record is null) return false;
+
+            _dbContext.Remove(record);
+            await _dbContext.SaveChangesAsync();
+
+            return true;
+        }
+
     }
 }

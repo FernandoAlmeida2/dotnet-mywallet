@@ -14,6 +14,13 @@ namespace dotnet_mywallet.Repositories.RecordRepository
             _dbContext = dbContext;
             _userContext = userContext;
         }
+
+        public async Task<List<Record>> FindAll()
+        {
+            return await _dbContext.Records
+                .Where(r => r.User!.Id == _userContext.GetUserId()).ToListAsync();
+        }
+
         public async Task<int> InsertOne(Record newRecord)
         {
             newRecord.User = await _dbContext.Users

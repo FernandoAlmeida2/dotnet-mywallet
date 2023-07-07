@@ -6,5 +6,6 @@ namespace dotnet_mywallet.Services.RecordService
     public interface IRecordService
     {
         Task<ServiceResponse<int>> SaveRecord(SaveRecordReqDto newRecord);
+        Task<ServiceResponse<List<RecordResDto>>> GetAll();
     }
 }

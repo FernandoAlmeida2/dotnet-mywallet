@@ -22,5 +22,11 @@ namespace dotnet_mywallet.Controllers
         {
             return Created("Save a record", await _recordService.SaveRecord(record));
         }
+
+        [HttpGet("getAll")]
+        public async Task<ActionResult<ServiceResponse<List<RecordResDto>>>> GetAll()
+        {
+            return Ok(await _recordService.GetAll());
+        }
     }
 }

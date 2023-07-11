@@ -28,8 +28,11 @@ namespace dotnet_mywallet.Services.AuthService
                 return response;
             }
 
-            response.Data!.Token = CreateToken(user);
-            response.Data.Name = user.Name;
+            response.Data = new LoginResponseDto {
+                Name = user.Name,
+                Token = CreateToken(user)
+            };
+            
             response.Message = "Login was successful.";
 
             return response;

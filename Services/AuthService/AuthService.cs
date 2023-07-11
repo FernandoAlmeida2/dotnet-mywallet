@@ -80,7 +80,7 @@ namespace dotnet_mywallet.Services.AuthService
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email)
             };
-            var appSettingsToken = _configuration.GetSection("AppSettings:Token").Value;
+            var appSettingsToken = Environment.GetEnvironmentVariable("TokenJwt");
 
             if (appSettingsToken is null) throw new Exception("AppSettings Token is null!");
    

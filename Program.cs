@@ -19,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<DataContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Default"));
+    options.UseNpgsql(Environment.GetEnvironmentVariable("ConnectionStringMyWallet"));
 });
 
 builder.Services.AddControllers();
@@ -50,7 +50,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         options.TokenValidationParameters = new TokenValidationParameters{
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8
-                .GetBytes(builder.Configuration.GetSection("AppSettings:Token").Value!)),
+                .GetBytes(Environment.GetEnvironmentVariable("TokenJwt")!)),
             ValidateIssuer = false,
             ValidateAudience = false 
         };

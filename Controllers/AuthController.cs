@@ -16,7 +16,7 @@ namespace dotnet_mywallet.Controllers
         }
 
         [HttpPost("signin")]
-        public async Task<ActionResult<ServiceResponse<string>>> Login(UserLoginDto user)
+        public async Task<ActionResult<ServiceResponse<LoginResponseDto>>> Login(UserLoginDto user)
         {
             var response = await _authService.Login(user.Email, user.Password);
 

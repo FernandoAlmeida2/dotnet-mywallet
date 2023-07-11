@@ -1,5 +1,6 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using dotnet_mywallet.Dtos.User;
 using dotnet_mywallet.Models;
 using Microsoft.IdentityModel.Tokens;
 
@@ -16,9 +17,9 @@ namespace dotnet_mywallet.Services.AuthService
             _configuration = configuration;
         }
 
-        public async Task<ServiceResponse<string>> Login(string email, string password)
+        public async Task<ServiceResponse<LoginResponseDto>> Login(string email, string password)
         {
-            var response = new ServiceResponse<string>();
+            var response = new ServiceResponse<LoginResponseDto>();
 
             var user = await _authRepo.FindByEmail(email);
             if (user is null || !VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
@@ -27,7 +28,8 @@ namespace dotnet_mywallet.Services.AuthService
                 return response;
             }
 
-            response.Data = CreateToken(user);
+            response.Data!.Token = CreateToken(user);
+            response.Data.Name = user.Name;
             response.Message = "Login was successful.";
 
             return response;

@@ -6,6 +6,6 @@ namespace dotnet_mywallet.Services.AuthService
     public interface IAuthService
     {
         Task<ServiceResponse<int>> SignUp(User user, string password);
-        Task<ServiceResponse<string>> Login(string email, string password);
+        Task<ServiceResponse<LoginResponseDto>> Login(string email, string password);
     }
 }

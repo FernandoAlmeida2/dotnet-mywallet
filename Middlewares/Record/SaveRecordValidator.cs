@@ -10,6 +10,7 @@ namespace dotnet_mywallet.Middlewares.Record
         {
             RuleFor(p => p.Amount).GreaterThan(0).WithMessage("Amount must be greater than zero");
             RuleFor(p => p.Type).IsInEnum().WithMessage("Type must be Income or Expense");
+            RuleFor(p => p.Description).NotEmpty().WithMessage("Required field! (Not empty)");
         }
     }
 }

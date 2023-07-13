@@ -22,6 +22,7 @@ namespace dotnet_mywallet.Data
             record.Property(x => x.Amount).HasColumnName("amount").IsRequired();
             record.Property(x => x.Type).HasColumnName("type").IsRequired();
             record.Property(x => x.CreatedAt).HasColumnName("createdAt").IsRequired();
+            record.Property(x => x.Description).HasColumnName("description").IsRequired();
         }
 
         public DbSet<User> Users => Set<User>();

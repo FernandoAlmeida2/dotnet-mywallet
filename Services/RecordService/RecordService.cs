@@ -21,6 +21,7 @@ namespace dotnet_mywallet.Services.RecordService
                 Id = r.Id,
                 Amount = r.Amount,
                 Type = r.Type,
+                Description = r.Description,
                 CreatedAt = r.CreatedAt
             }).ToList();
 
@@ -32,6 +33,7 @@ namespace dotnet_mywallet.Services.RecordService
             var response = new ServiceResponse<int>();
             var record = new Record
             {
+                Description = newRecord.Description,
                 Amount = newRecord.Amount,
                 Type = newRecord.Type
             };

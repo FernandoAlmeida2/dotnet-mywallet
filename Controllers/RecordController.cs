@@ -30,9 +30,9 @@ namespace dotnet_mywallet.Controllers
         }
 
         [HttpPatch("{id}")]
-        public async Task<ActionResult<ServiceResponse<string>>> PatchAmount(int id, UpdateAmountDto request)
+        public async Task<ActionResult<ServiceResponse<string>>> PatchAmount(int id, UpdateRecordDto request)
         {
-            var response = await _recordService.PatchAmount(id, request.Amount);
+            var response = await _recordService.PatchRecord(id, request.Amount, request.Description);
             if (!response.Success)
             {
                 if(response.Message == "Record not found.") return NotFound(response);

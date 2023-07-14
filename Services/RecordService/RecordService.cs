@@ -44,12 +44,12 @@ namespace dotnet_mywallet.Services.RecordService
             return response;
         }
 
-        public async Task<ServiceResponse<string>> PatchAmount(int id, int amount)
+        public async Task<ServiceResponse<string>> PatchRecord(int id, int amount, string description)
         {
             var response = new ServiceResponse<string>();
             try
             {
-                var recordExists = await _recordRepo.UpdateAmount(id, amount);
+                var recordExists = await _recordRepo.UpdateRecord(id, amount, description);
                 if (!recordExists) throw new Exception("Record not found");
 
                 response.Data = "Ok";

@@ -18,7 +18,10 @@ namespace dotnet_mywallet.Repositories.RecordRepository
         public async Task<List<Record>> FindAll()
         {
             return await _dbContext.Records
-                .Where(r => r.User!.Id == _userContext.GetUserId()).ToListAsync();
+                .Where(r => r.User!.Id == _userContext.GetUserId())
+                .OrderByDescending((r) => r.CreatedAt)
+                .ToListAsync()
+                ;
         }
 
          public async Task<Record?> FindRecordById(int id)

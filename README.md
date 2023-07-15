@@ -30,10 +30,22 @@ Algumas das principais tecnologias e frameworks utilizados no projeto.<br/><br/>
 
 1. Clone o repositório
 
-2. Execute o projeto (Verifique se possui alguma versão do SDK 6+ instalado )
+2. Forneça uma string de conexão para o banco de dados PostgreSQL, preenchendo cada parâmetro que aparece na string abaixo:
+
+```bash
+export ConnectionStringMyWallet="User Id=; Password=; Host=; Port=; Database=;"
+```
+
+3. Forneça uma string com nome "TokenJwt" como fonte para autenticação JWT (mín. 80 caracteres). Exemplo:
+
+```bash
+export TokenJwt="Lorem ipsum mollis porttitor, duis laoreet lacinia libero, viverra potenti."
+```
+
+4. Execute o projeto (Verifique se possui alguma versão do SDK 6+ instalado )
 
 ```bash
 dotnet run
 ```
 
-3. Acesse o endereço http://localhost:5008 no navegador de sua preferência. 
+5. Acesse o endereço http://localhost:5008 no navegador de sua preferência. 
